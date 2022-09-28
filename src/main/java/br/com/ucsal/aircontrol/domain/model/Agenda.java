@@ -1,4 +1,4 @@
-package br.com.ucsal.aircontrol.model;
+package br.com.ucsal.aircontrol.domain.model;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -13,7 +14,7 @@ import javax.validation.constraints.Size;
 import br.com.ucsal.aircontrol.enums.Comando;
 import br.com.ucsal.aircontrol.enums.DiaSemana;
 
-@Entity
+//@Entity
 public class Agenda {
 
 	//PK
@@ -21,9 +22,6 @@ public class Agenda {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 	
-	//DE SEGUNDA A SÁBADO
-	/*TODO VERIFICAR A VIABILIDADE DE MANTER ENUM
-	TALVES COMO UMA STRING A IMPLEMENTAÇÃO SEJA MAIS SIMPLES*/
 	@Enumerated(EnumType.STRING)
 	public DiaSemana diaSemana;
 	
@@ -32,13 +30,13 @@ public class Agenda {
 	public String horario;
 	
 	//UM REGISTRO DE AGENDA ESTÁ RELACIONADO A UM EQUIPAMENTO
-	@OneToOne
+	@ManyToOne
 	@NotBlank
 	public Equipamento equipamento;
 	
 	@Enumerated(EnumType.STRING)
 	/*TODO VERIFICAR A VIABILIDADE DE MANTER ENUM
-	TALVES COMO UMA STRING A IMPLEMENTAÇÃO SEJA MAIS SIMPLES*/
+	TALVEZ COMO UMA STRING A IMPLEMENTAÇÃO SEJA MAIS SIMPLES*/
 	public Comando comando;
 	
 }

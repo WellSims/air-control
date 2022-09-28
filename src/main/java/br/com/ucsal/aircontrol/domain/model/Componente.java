@@ -1,4 +1,4 @@
-package br.com.ucsal.aircontrol.model;
+package br.com.ucsal.aircontrol.domain.model;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,7 +14,7 @@ import br.com.ucsal.aircontrol.enums.StatusComponente;
 
 /*O COMPONENTE É A PORTA DO ARDUINO QUE LIGA O EQUIPAMENTO*/
 
-@Entity
+//@Entity
 public class Componente {
 
 	@Id
@@ -25,9 +25,8 @@ public class Componente {
 	@Size(max = 60)
 	private String nome;
 	
+	@NotBlank
 	@Enumerated(EnumType.STRING)
-	/*TODO VERIFICAR A VIABILIDADE DE MANTER ENUM
-	TALVES COMO UMA STRING A IMPLEMENTAÇÃO SEJA MAIS SIMPLES*/
 	private StatusComponente status;
 	
 	//EM UMA LOCALIZAÇÃO PODEM COEXISTIR MAIS DE UM COMPONENTE.

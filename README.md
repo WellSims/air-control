@@ -4,5 +4,8 @@ Este repositório é dedicado ao código fonte do AirControl, sistema que servir
 
 ## Tecnologias
 
-- Java 11
-- Spring Boot 2.7.3
+- IDE Spring Tool Suite 4;
+- Java 11;
+- Spring Boot 2.7.3;
+- Lombok 0.34.1-2019;
+- MySQL

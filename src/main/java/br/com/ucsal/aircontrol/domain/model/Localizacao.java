@@ -1,14 +1,18 @@
-package br.com.ucsal.aircontrol.model;
+package br.com.ucsal.aircontrol.domain.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 import br.com.ucsal.aircontrol.enums.TipoLocalizacao;
 
 /*
@@ -17,16 +21,15 @@ import br.com.ucsal.aircontrol.enums.TipoLocalizacao;
  * 
  * */
 
-@Entity
+//@Entity
 public class Localizacao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 	
+	@NotBlank
 	@Enumerated(EnumType.STRING)
-	/*TODO VERIFICAR A VIABILIDADE DE MANTER ENUM
-	TALVES COMO UMA STRING A IMPLEMENTAÇÃO SEJA MAIS SIMPLES*/
 	public TipoLocalizacao tipo;
 	
 	@NotBlank
@@ -37,4 +40,6 @@ public class Localizacao {
 	@Size(max = 60)
 	public String predio;
 	
+	@OneToMany(mappedBy = "localizacao", cascade = CascadeType.ALL)
+	private List<Componente> componentes = new ArrayList<>();
 }
