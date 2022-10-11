@@ -3,6 +3,8 @@ package br.com.ucsal.aircontrol.domain.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.ucsal.aircontrol.domain.exception.NegocioException;
+import br.com.ucsal.aircontrol.domain.model.Componente;
 import br.com.ucsal.aircontrol.domain.model.Equipamento;
 import br.com.ucsal.aircontrol.domain.repository.EquipamentoRepository;
 import lombok.AllArgsConstructor;
@@ -20,6 +22,12 @@ public class EquipamentoService {
 	@Transactional
 	public Equipamento salvar(Equipamento equipamento) {
 		return equipamentoRepository.save(equipamento);
+	}
+	
+	@Transactional
+	public Equipamento buscar(Long equipamentoId) {
+		return equipamentoRepository.findById(equipamentoId)
+				.orElseThrow(()->new NegocioException("Equipamento não encontrado"));
 	}
 	
 	@Transactional

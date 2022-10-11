@@ -14,27 +14,33 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import br.com.ucsal.aircontrol.enums.TipoLocalizacao;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 /*
- * criar enum para SALA E LAMI
+ * CRIAR ENUM PARA SALA E LAMI
  * USUÁRIO PREENCHE APENAS O NUMERO DA SALA/LAMI
  * 
  * */
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Getter
+@Setter
 //@Entity
 public class Localizacao {
 
+	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 	
-	@NotBlank
 	@Enumerated(EnumType.STRING)
 	public TipoLocalizacao tipo;
 	
 	@NotBlank
 	@Size(max = 60)
-	public String numero;
+	public String complemento;
 	
 	@NotBlank
 	@Size(max = 60)

@@ -1,6 +1,7 @@
 package br.com.ucsal.aircontrol.exceptionhandler;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 		
 		Erro erro = new Erro();
 		erro.setStatus(status.value());
-		erro.setDataHora(LocalDateTime.now());
+		erro.setDataHora(OffsetDateTime.now());
 		erro.setTitulo("Um ou mais campos estão inválidos. Faça o preenchimento e tente novamente.");
 		erro.setCampos(campos);
 		return handleExceptionInternal(ex, erro, headers, status, request);
@@ -54,7 +55,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 		
 		Erro erro = new Erro();
 		erro.setStatus(status.value());
-		erro.setDataHora(LocalDateTime.now());
+		erro.setDataHora(OffsetDateTime.now());
 		erro.setTitulo(ex.getMessage());
 		
 		return handleExceptionInternal(ex, erro, new HttpHeaders(), status, request);

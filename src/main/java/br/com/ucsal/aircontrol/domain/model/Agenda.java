@@ -1,5 +1,6 @@
 package br.com.ucsal.aircontrol.domain.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -7,36 +8,41 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import br.com.ucsal.aircontrol.enums.Comando;
 import br.com.ucsal.aircontrol.enums.DiaSemana;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-//@Entity
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Getter
+@Setter
+@Entity
 public class Agenda {
-
-	//PK
+	
+	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
+	private Long id;
 	
 	@Enumerated(EnumType.STRING)
-	public DiaSemana diaSemana;
+	@Column(name="dia_semana")
+	private DiaSemana diaSemana;
 	
 	@NotBlank
 	@Size(max = 60)
-	public String horario;
+	private String horario;
 	
 	//UM REGISTRO DE AGENDA ESTÁ RELACIONADO A UM EQUIPAMENTO
 	@ManyToOne
-	@NotBlank
-	public Equipamento equipamento;
+	private Equipamento equipamento;
 	
-	@Enumerated(EnumType.STRING)
 	/*TODO VERIFICAR A VIABILIDADE DE MANTER ENUM
 	TALVEZ COMO UMA STRING A IMPLEMENTAÇÃO SEJA MAIS SIMPLES*/
-	public Comando comando;
+	@Enumerated(EnumType.STRING)
+	private Comando comando;
 	
 }
