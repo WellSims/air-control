@@ -1,12 +1,12 @@
 package br.com.ucsal.aircontrol.controller;
 
-
 import java.util.List;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +28,7 @@ import br.com.ucsal.aircontrol.model.EquipamentoModel;
 import br.com.ucsal.aircontrol.model.input.EquipamentoInput;
 import lombok.AllArgsConstructor;
 
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/equipamentos")
@@ -68,7 +69,11 @@ public class EquipamentoController {
 			return ResponseEntity.notFound().build();
 		}
 		
-		equipamento.setComponente(equipamentoService.buscar(equipamentoId).getComponente());
+		if (equipamento.getComponente() == null) {
+			equipamento.setComponente(equipamentoService.buscar(equipamentoId).getComponente());
+		} else {
+			equipamento.setComponente(componenteService.buscar(equipamento.getComponente().getId()));
+		}
 		equipamento.setId(equipamentoId);
 		equipamento = equipamentoService.salvar(equipamento);
 		
