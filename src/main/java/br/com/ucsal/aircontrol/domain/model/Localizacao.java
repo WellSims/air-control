@@ -27,7 +27,7 @@ import lombok.Setter;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
-//@Entity
+@Entity
 public class Localizacao {
 
 	@EqualsAndHashCode.Include
@@ -35,17 +35,12 @@ public class Localizacao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 	
-	@Enumerated(EnumType.STRING)
-	public TipoLocalizacao tipo;
-	
 	@NotBlank
 	@Size(max = 60)
-	public String complemento;
+	public String sala;
 	
 	@NotBlank
 	@Size(max = 60)
 	public String predio;
 	
-	@OneToMany(mappedBy = "localizacao", cascade = CascadeType.ALL)
-	private List<Componente> componentes = new ArrayList<>();
 }

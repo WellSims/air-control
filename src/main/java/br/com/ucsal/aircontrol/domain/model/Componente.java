@@ -44,6 +44,6 @@ public class Componente {
 	private StatusComponente status;
 	
 	//EM UMA LOCALIZAÇÃO PODEM COEXISTIR MAIS DE UM COMPONENTE.
-//	@ManyToOne
-//	private Localizacao localizacao;
+	@ManyToOne
+	private Localizacao localizacao;
 }

@@ -6,10 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ComponenteModel {
+public class LocalizacaoModel {
 
 	private Long id;
-	private String nome;
-	private StatusComponente status;
-	private LocalizacaoModel localizacao;
+	private String sala;
+	private String predio;
 }

@@ -32,6 +32,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/equipamentos")
+
+//PERMISSÕES E USUÁRIOS
+//TELA DE LOGIN E OPÇÃO DE LOGOUT
+
 public class EquipamentoController {
 	
 	private EquipamentoService equipamentoService;

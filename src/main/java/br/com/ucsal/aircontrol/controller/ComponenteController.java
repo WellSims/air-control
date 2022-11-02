@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ucsal.aircontrol.domain.model.Componente;
 import br.com.ucsal.aircontrol.domain.model.Equipamento;
+import br.com.ucsal.aircontrol.domain.model.Localizacao;
 import br.com.ucsal.aircontrol.domain.repository.ComponenteRepository;
 import br.com.ucsal.aircontrol.domain.service.ComponenteService;
+import br.com.ucsal.aircontrol.domain.service.LocalizacaoService;
 import lombok.AllArgsConstructor;
 
 @CrossOrigin(origins = "*")
@@ -31,10 +33,13 @@ public class ComponenteController {
 	
 	private ComponenteService componenteService;
 	private ComponenteRepository componenteRepository;
+	private LocalizacaoService localizacaoService;
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Componente salvar(@Valid @RequestBody Componente componente) {
+		Localizacao localizacao = localizacaoService.buscar(componente.getLocalizacao().getId());
+		componente.setLocalizacao(localizacao);
 		return componenteService.salvar(componente);
 	}
 	
@@ -49,6 +54,12 @@ public class ComponenteController {
 		
 		if (!componenteRepository.existsById(componenteId)) {
 			return ResponseEntity.notFound().build();
+		}
+		
+		if (componente.getLocalizacao() == null) {
+			componente.setLocalizacao(componenteService.buscar(componenteId).getLocalizacao());
+		} else {
+			componente.setLocalizacao(localizacaoService.buscar(componente.getLocalizacao().getId()));
 		}
 		
 		componente.setId(componenteId);
